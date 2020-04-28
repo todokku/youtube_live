@@ -1,27 +1,5 @@
 var amamiya;
 
-$(function () {
-$('#btn2').on('click', function () {
-    $("#playing").append('<iframe class="amamiya" width="534" height="334" src="https://www.youtube.com/embed/EuFx4dtMSXY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-        $("header").append('<input type="button" id="btn4" value="削除" onclick="ama()">')
-    })
-}); 
-
-$(function () {
-$('#test').on('click', function () {
-    if(amamiya){
-        $("iframe").remove();
-        amamiya=false;
-    }
-    else{
-    $("#playing").append('<iframe class="item" width="534" height="334" src="https://www.youtube.com/embed/EuFx4dtMSXY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
-    amamiya = true;
-        }
-    })
-});
-
-
-
 function ama(){
     $("iframe").remove();
     $("#btn4").remove();
@@ -73,26 +51,25 @@ $(function () {
 
     $(function () {
         setInterval(update, 5000);
-        //10000ミリ秒ごとにupdateという関数を実行する
     });
-    function update() { //この関数では以下のことを行う
-        if ($('.live')[0]) { //もし'live'というクラスがあったら
-            var message_id = $('.live:last').data('id'); //一番最後にある'live'というクラスの'id'というデータ属性を取得し、'message_id'という変数に代入
+    function update() { 
+        if ($('.live')[0]) { 
+            var message_id = $('.live:last').data('id'); 
 
-        } else { //ない場合は
-            var message_id = 0 //0を代入
+        } else { 
+            var message_id = 0 
         }
-        $.ajax({ //ajax通信で以下のことを行う
-            url: location.href, //urlは現在のページを指定
-            type: 'GET', //メソッドを指定
-            data: { //railsに引き渡すデータは
-                message: { id: message_id } //このような形(paramsの形をしています)で、'id'には'message_id'を入れる
+        $.ajax({
+            url: location.href,
+            type: 'GET',
+            data: {
+                message: { id: message_id }
             },
-            dataType: 'json' //データはjson形式
+            dataType: 'json' 
         })
-            .always(function (data) { //通信したら、成功しようがしまいが受け取ったデータ（@new_message)を引数にとって以下のことを行う
-                $.each(data, function (i, data) { //'data'を'data'に代入してeachで回す
-                    buildMESSAGE(data); //buildMESSAGEを呼び出す
+            .always(function (data) { 
+                $.each(data, function (i, data) { 
+                    buildMESSAGE(data); 
                 });
             });
     }
