@@ -1,16 +1,5 @@
 var amamiya;
 
-function ama(){
-    $("iframe").remove();
-    $("#btn4").remove();
-    $("#btn2").prop("disabled", false);
-    console.log("1");
-}
-
-$(function get_size(){
-    var b=$(".item");
-    console.log(b.height());
-});
 
 $(function () {
     $("#acMenu dt").on("click", function () {
